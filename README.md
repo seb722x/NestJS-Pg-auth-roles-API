@@ -21,7 +21,11 @@ it is because sometimes docker is not ready inmediatly)
 
 
 
-
+instructions
+1. create an account 
+2. create a role
+3. assign a role to the previous account with the id and the name of the role previosly created
+4. use jwt token with the role
 
 
 

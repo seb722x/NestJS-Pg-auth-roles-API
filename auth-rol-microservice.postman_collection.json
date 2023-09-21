@@ -47,7 +47,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAzNzc0NjkyLTU3OTMtNDhkYi04NWE4LTUxMDQxODYzYTZjZSIsImlhdCI6MTY5NTI2MTkxMSwiZXhwIjoxNjk1MjY5MTExfQ.Cic_a9sI7rKxLaLQOukCcKzpAn8uBkUHoQ-39HFSbgY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEyYTk3MTk5LTYxMGItNDA1OC04NWI1LWY3YmZlOThiMGRlNSIsImlhdCI6MTY5NTI3MDI0MiwiZXhwIjoxNjk1Mjc3NDQyfQ.qvHmedrOXSVewqtuh3CoRVZ8WwUAQPJa6x1bDlpy8II",
 									"type": "string"
 								}
 							]
@@ -55,7 +55,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/api/auth/check-status",
+							"raw": "localhost:3000/api/auth/private3",
 							"host": [
 								"localhost"
 							],
@@ -63,7 +63,7 @@
 							"path": [
 								"api",
 								"auth",
-								"check-status"
+								"private3"
 							]
 						}
 					},
@@ -189,7 +189,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/api/roles/03774692-5793-48db-85a8-51041863a6ce/assign-role/admin",
+							"raw": "localhost:3000/api/roles/12a97199-610b-4058-85b5-f7bfe98b0de5/assign-role/admin",
 							"host": [
 								"localhost"
 							],
@@ -197,7 +197,7 @@
 							"path": [
 								"api",
 								"roles",
-								"03774692-5793-48db-85a8-51041863a6ce",
+								"12a97199-610b-4058-85b5-f7bfe98b0de5",
 								"assign-role",
 								"admin"
 							]

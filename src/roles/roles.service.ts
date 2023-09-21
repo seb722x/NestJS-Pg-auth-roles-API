@@ -27,14 +27,13 @@ export class RolesService {
   async create( createRolDTO: CreateRolDTO) {
     
     try {
-
       const { name } = createRolDTO;
       const rol = this.roleRepository.create({ name });
       await this.roleRepository.save( rol )
       return { rol };
 
-    } catch (error) {
-      console.log(error)
+    }catch (error) {
+      return this.handleDBExceptions(error)
     }
 
   }
@@ -52,41 +51,37 @@ export class RolesService {
      if (!role) {
       throw new Error('Role not found');
      }
-
     user.role = role; 
     await this.userRepository.save(user);
+    return user.role
+
     } catch(error){
-      
+      return this.handleDBExceptions(error)
     }
     
   }
 
   async findAll( paginationDto: PaginationDto ) {
 
-    const { limit = 10, offset = 0 } = paginationDto;
+    try{
+      const { limit = 10, offset = 0 } = paginationDto;
 
-    const roles = await this.roleRepository.find({
+      const roles = await this.roleRepository.find({
       take: limit,
       skip: offset,
-      
-    })
+      })
 
-    return roles
-
-    
+      return roles
+    }catch(error){
+      return this.handleDBExceptions(error)
+    }
   }
 
   async findOne( term: string ) {
 
     let roles: Roles;
-
-    if ( isUUID(term) ) {
-      roles = await this.roleRepository.findOneBy({ id: term });
-    } else {
-      const queryBuilder = this.roleRepository.createQueryBuilder('prod'); 
-
-    }
-
+    roles = await this.roleRepository.findOneBy({ id: term });
+  
     if ( !roles ) 
       throw new NotFoundException(`Product with ${ term } not found`);
 
@@ -94,17 +89,45 @@ export class RolesService {
   }
 
   async findOnePlain( term: string ) {
-    const { ...rest } = await this.findOne( term );
-    return { ...rest };
+    try{
+      const { ...rest } = await this.findOne( term );
+      return { ...rest };
 
+    } catch(error){
+      return this.handleDBExceptions(error);
+    }
   }
 
   async remove(id: string,isDeleted:boolean) {
-   
+   try{
     const role = await this.findOne( id );
     role.isDeleted = isDeleted
     await this.roleRepository.save(role);
     return role
+   }catch(error){
+      this.handleDBExceptions(error);
+   }
+  }
+
+  async update(term: string, updateName:string) {
+    try {
+      
+      const rol = await this.roleRepository.findOne({ where: { id: term } });
+  
+      if (!rol) {
+        throw new NotFoundException(`User with id: ${term} not found`);
+      }
+  
+      rol.name = updateName
+      const currentDate = new Date();
+      rol.updatedAt = currentDate;
+
+      await this.userRepository.save(rol);
+  
+      return rol;
+    } catch (error) {
+      this.handleDBExceptions(error);
+    }
   }
 
 

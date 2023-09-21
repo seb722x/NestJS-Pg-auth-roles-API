@@ -31,14 +31,7 @@ export class RolesController {
     return this.rolesService.findOnePlain( term );
   }
 
-  @Patch('update/:id')
-  //@Auth( ValidRoles.admin )
-  update(
-    @Param('id', ParseUUIDPipe ) id: string, 
-    @Body() updateRolDTO: UpdateRolDTO,
-  ) {
-    //return this.rolesService.update( id, updateProductDto );
-  }
+  
 
   @Delete('delete/:id')
   //@Auth( ValidRoles.admin )

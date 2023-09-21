@@ -29,11 +29,13 @@ export class AuthController {
   }
   
   @Delete('delete/:id')
+  @Auth( ValidRoles.admin )
   deleteUser(@Param('id', ParseUUIDPipe ) id: string,@Body() body: { isDeleted: boolean }) {
     return this.authService.delete( id,body.isDeleted );
   }
 
   @Patch('update/:id')
+  @Auth( ValidRoles.superUser )
   updateUser(@Param('id', ParseUUIDPipe) id: string, @Body() updateUserDto:UpdateUserDto) {
     return this.authService.update(id, updateUserDto);
   }
@@ -50,9 +52,9 @@ export class AuthController {
 
 
 
-  @Get('private3')
+  @Get('admin')
   @Auth( ValidRoles.admin )
-  privateRoute3(
+  privateRoute1(
     @GetUser() user: User
   ) {
 
@@ -62,6 +64,29 @@ export class AuthController {
     }
   }
 
+  @Get('super-admin')
+  @Auth( ValidRoles.superUser )
+  privateRoute2(
+    @GetUser() user: User
+  ) {
+
+    return {
+      ok: true,
+      user
+    }
+  }
+
+  @Get('user')
+  @Auth( ValidRoles.user )
+  privateRoute3(
+    @GetUser() user: User
+  ) {
+
+    return {
+      ok: true,
+      user
+    }
+  }
 
 
 }

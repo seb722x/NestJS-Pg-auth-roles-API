@@ -42,6 +42,6 @@ export class RolesController {
 
   @Post(':id/assign-role/:roleName')
   async assignRole(@Param('id') userId: string, @Param('roleName') roleName: string) {
-    await this.rolesService.assignRoleToUser(userId, roleName);
+   return  await this.rolesService.assignRoleToUser(userId, roleName);
   }
 }

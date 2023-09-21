@@ -13,7 +13,12 @@
 ```
 docker-compose up -d
 ```
-6. run : ```yarn start:dev```
+6. run : ```yarn start:dev``` (after run docker, if at first time it does not run because is trying to connect => ctrl + c and the try again, 
+it is because sometimes docker is not ready inmediatly)
+
+7. postman: https://interstellar-crescent-253112.postman.co/workspace/dfsdf~ab9a2158-73df-4e5c-ad1b-833cc6d3ba62/collection/24745741-9bcd4694-4cc6-477d-94a2-71044bac21b1?action=share&creator=24745741
+
+
 
 
 

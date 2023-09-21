@@ -1,0 +1,53 @@
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe, Query } from '@nestjs/common';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
+
+import { RolesService } from './roles.service';
+import { CreateRolDTO } from './dto/create-rol.dto';
+import { UpdateRolDTO } from './dto/update-rol.dto';
+import { PaginationDto } from '../common/dtos/pagination.dto';
+
+
+
+@ApiTags('roles')
+@Controller('roles')
+export class RolesController {
+  constructor(private readonly rolesService: RolesService,
+    ) {}
+
+  @Post('create')
+  //@Auth()
+  create(
+    @Body() createRolDTO: CreateRolDTO ) {
+    return this.rolesService.create(createRolDTO );
+  }
+
+  @Get('find-all')
+  findAll( @Query() paginationDto:PaginationDto ) {
+    return this.rolesService.findAll( paginationDto );
+  }
+
+  @Get('find/:term')
+  findOne(@Param( 'term' ) term: string) {
+    return this.rolesService.findOnePlain( term );
+  }
+
+  @Patch('update/:id')
+  //@Auth( ValidRoles.admin )
+  update(
+    @Param('id', ParseUUIDPipe ) id: string, 
+    @Body() updateRolDTO: UpdateRolDTO,
+  ) {
+    //return this.rolesService.update( id, updateProductDto );
+  }
+
+  @Delete('delete/:id')
+  //@Auth( ValidRoles.admin )
+  remove(@Param('id', ParseUUIDPipe ) id: string, @Body() body: { isDeleted: boolean }) {
+    return this.rolesService.remove( id , body.isDeleted);
+  }
+
+  @Post(':id/assign-role/:roleName')
+  async assignRole(@Param('id') userId: string, @Param('roleName') roleName: string) {
+    await this.rolesService.assignRoleToUser(userId, roleName);
+  }
+}

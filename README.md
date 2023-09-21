@@ -22,10 +22,13 @@ it is because sometimes docker is not ready inmediatly)
 
 
 instructions
-1. create an account 
-2. create a role
-3. assign a role to the previous account with the id and the name of the role previosly created
-4. use jwt token with the role
+1. execute seed
+2. you can create a new account or use any existing
+3. logIn and use the uuid
+4. assign-role with uuid (admin)
+5. login again and take jwt
+6. use it in refreshJWT bearer token or in jwttoken (just admin role) 
+
 
 
 

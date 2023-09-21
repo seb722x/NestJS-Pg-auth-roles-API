@@ -8,6 +8,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { CommonModule } from './common/common.module';
 import { AuthModule } from './auth/auth.module';
 import { RolesModule } from './roles/roles.module';
+import { SeedModule } from './seed/seed.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -33,6 +34,8 @@ import { RolesModule } from './roles/roles.module';
     CommonModule,
 
     AuthModule,
+
+    SeedModule
 
   ],
 })

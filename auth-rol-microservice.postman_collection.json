@@ -40,14 +40,14 @@
 					"response": []
 				},
 				{
-					"name": "refreshJWT-token",
+					"name": "refreshJWT-token=>input old bearer token",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEyYTk3MTk5LTYxMGItNDA1OC04NWI1LWY3YmZlOThiMGRlNSIsImlhdCI6MTY5NTI3MDI0MiwiZXhwIjoxNjk1Mjc3NDQyfQ.qvHmedrOXSVewqtuh3CoRVZ8WwUAQPJa6x1bDlpy8II",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0ZTgyMDNmLTcxM2EtNDE3My04ZTMwLTc5MTUxMmM0OGE3YSIsImlhdCI6MTY5NTI3NjU2MCwiZXhwIjoxNjk1MjgzNzYwfQ.2haQoFN32cphhYOyLcJGiCMW9ffD5vmsKmWLSkUG12M",
 									"type": "string"
 								}
 							]
@@ -55,7 +55,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/api/auth/private3",
+							"raw": "localhost:3000/api/auth/check-status",
 							"host": [
 								"localhost"
 							],
@@ -63,7 +63,7 @@
 							"path": [
 								"api",
 								"auth",
-								"private3"
+								"check-status"
 							]
 						}
 					},
@@ -99,12 +99,21 @@
 					"response": []
 				},
 				{
-					"name": "user-delete",
+					"name": "user-delete => input uuid",
 					"request": {
 						"method": "DELETE",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isDeleted\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:3000/api/auth/delete/284cd956-cbbf-48d8-943e-f3af1684500d",
+							"raw": "localhost:3000/api/auth/delete/659a936c-e0da-416d-b47c-cc521b07614a",
 							"host": [
 								"localhost"
 							],
@@ -113,7 +122,7 @@
 								"api",
 								"auth",
 								"delete",
-								"284cd956-cbbf-48d8-943e-f3af1684500d"
+								"659a936c-e0da-416d-b47c-cc521b07614a"
 							]
 						}
 					},
@@ -148,6 +157,36 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "jwttoken - admin => use a bearer token with admin role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0ZTgyMDNmLTcxM2EtNDE3My04ZTMwLTc5MTUxMmM0OGE3YSIsImlhdCI6MTY5NTI3NjYzMSwiZXhwIjoxNjk1MjgzODMxfQ.-qMyOgRAVNskzdI4sKAhxS0pTY1S7W5fJ1KeVxjEeiY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/auth/admin",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"admin"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -161,7 +200,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"admin\"\r\n}",
+							"raw": "{\r\n    \"name\":\"user\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -189,7 +228,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/api/roles/12a97199-610b-4058-85b5-f7bfe98b0de5/assign-role/admin",
+							"raw": "localhost:3000/api/roles/a4e8203f-713a-4173-8e30-791512c48a7a/assign-role/admin",
 							"host": [
 								"localhost"
 							],
@@ -197,7 +236,7 @@
 							"path": [
 								"api",
 								"roles",
-								"12a97199-610b-4058-85b5-f7bfe98b0de5",
+								"a4e8203f-713a-4173-8e30-791512c48a7a",
 								"assign-role",
 								"admin"
 							]
@@ -271,6 +310,25 @@
 								"roles",
 								"delete",
 								"6d30abdb-ebfa-4afa-8bc5-732ae90ce416"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SEED",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/seed",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"seed"
 							]
 						}
 					},

@@ -15,29 +15,26 @@ export class UserRoleGuard implements CanActivate {
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
     
-    const validRoles: string[] = this.reflector.get(META_ROLES, context.getHandler());
+    const validRoles: string = this.reflector.get( META_ROLES , context.getHandler() )
 
-    if (!validRoles) return true;
-    if (validRoles.length === 0) return true;
+    if ( !validRoles ) return true;
+    if ( validRoles.length === 0 ) return true;
     
     const req = context.switchToHttp().getRequest();
     const user = req.user as User;
-    console.log(user)
 
-    if (!user) 
-      throw new BadRequestException('User not found');
-
-    // Accede al nombre del rol a través de la relación 'role'
-    const roleName = user.role.name;
-    console.log(roleName)
-
-    if (!roleName || !validRoles.includes(roleName)) {
-      throw new ForbiddenException(
-        `User ${user.fullName} needs a valid role: [${validRoles}]`
-      );
+    if ( !user ) 
+      throw new BadRequestException('Usuario no encontrado en la base de datos');
+    
+    for (const role of user.roles ) {
+      if ( validRoles.includes( role ) ) {
+        return true;
+      }
     }
-
-    return true;
+    
+    throw new ForbiddenException(
+      `User ${ user.fullName } need a valid role: [${ validRoles }]`
+    );
   }
 }
 

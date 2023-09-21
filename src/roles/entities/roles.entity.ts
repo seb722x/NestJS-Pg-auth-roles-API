@@ -15,8 +15,8 @@ export class Roles {
     id: string;
 
     @ApiProperty({
-        example: 'T-Shirt Teslo',
-        description: 'Product Title',
+        example: 'admin',
+        description: 'roles',
         uniqueItems: true
     })
     @Column('text', {
@@ -25,24 +25,27 @@ export class Roles {
     name: string;
 
     @ApiProperty({
-        example: true,
-        description: 'Product price',
+        example: false,
+        description: 'this is deleted: true',
     })
-    
     @Column('bool', {
         default: false
     })
     isDeleted: boolean;
 
     @ApiProperty({
-        example: 'Anim reprehenderit nulla in anim mollit minim irure commodo.',
-        description: 'Product description',
+        example:  "2023-09-21T10:15:37.823Z",
+        description: 'date of created',
         default: null,
     })
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;
 
-
+    @ApiProperty({
+        example:  "2023-09-21T10:15:37.823Z",
+        description: 'date of updated',
+        default: null,
+    })
     @Column({ type: 'timestamp', nullable: true })
     updatedAt: Date;
 

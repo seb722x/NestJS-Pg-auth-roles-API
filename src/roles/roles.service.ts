@@ -1,12 +1,11 @@
 import { BadRequestException, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DataSource, Repository } from 'typeorm';
+import {  Repository } from 'typeorm';
 
 import { CreateRolDTO } from './dto/create-rol.dto';
 import { UpdateRolDTO } from './dto/update-rol.dto';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
-import { validate as isUUID } from 'uuid';
 import { Roles } from './entities';
 import { User } from '../auth/entities/user.entity';
 
@@ -52,6 +51,9 @@ export class RolesService {
       throw new Error('Role not found');
      }
     user.role = role; 
+    if (!user.roles.includes(roleName)) {
+      user.roles.push(roleName);
+    }
     await this.userRepository.save(user);
     return user.role
 
@@ -119,6 +121,7 @@ export class RolesService {
       }
   
       rol.name = updateName
+      
       const currentDate = new Date();
       rol.updatedAt = currentDate;
 

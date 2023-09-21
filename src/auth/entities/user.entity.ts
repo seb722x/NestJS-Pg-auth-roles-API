@@ -24,6 +24,11 @@ export class User {
     @Column('text')
     phone: string;
 
+    @Column('text', {
+        array:true,
+        default: ['customer']
+    })
+    roles: string[];
   
     
     @ManyToOne(() => Roles, role => role.users) 

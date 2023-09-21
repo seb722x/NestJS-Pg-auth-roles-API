@@ -3,8 +3,9 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { RolesService } from './roles.service';
 import { CreateRolDTO } from './dto/create-rol.dto';
-import { UpdateRolDTO } from './dto/update-rol.dto';
 import { PaginationDto } from '../common/dtos/pagination.dto';
+import { ValidRoles } from 'src/auth/interfaces';
+import { Auth } from 'src/auth/decorators';
 
 
 
@@ -34,7 +35,7 @@ export class RolesController {
   
 
   @Delete('delete/:id')
-  //@Auth( ValidRoles.admin )
+  @Auth( ValidRoles.admin )
   remove(@Param('id', ParseUUIDPipe ) id: string, @Body() body: { isDeleted: boolean }) {
     return this.rolesService.remove( id , body.isDeleted);
   }
